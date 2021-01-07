@@ -33,6 +33,7 @@ dependencies:
   flutter_linkify: ^4.0.2
   hive: ^1.4.4+1
   hive_flutter: ^0.3.1
+  auto_size_text: ^2.1.0
   flutter_web_router: ^0.0.1+2
 
   # The following adds the Cupertino Icons font to your application.

@@ -23,7 +23,7 @@ class AppCard extends StatelessWidget {
             Padding(
               padding: EdgeInsets.all(imagePadding),
               child: Hero(
-                tag: 'appIcon',
+                tag: publicApp.id,
                 child: CachedNetworkImage(
                   imageUrl: publicApp.iconUrl,
                   placeholder: (context, url) => Container(),

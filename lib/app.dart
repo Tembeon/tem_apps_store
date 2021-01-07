@@ -1,3 +1,6 @@
+// ignore: avoid_web_libraries_in_flutter
+import 'dart:html';
+
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
 import 'package:flutter/material.dart';
@@ -19,9 +22,15 @@ class TemAppsStore extends StatelessWidget {
     router.addRoute(
         '${ViewApp.routeName}/{id}',
         (request) => ViewApp(
-              publicAppName:
-                  Uri.parse(request.settings.name).path.replaceAll(ViewApp.routeName, ''),
+              publicAppName: Uri.parse(request.settings.name)
+                  .path
+                  .replaceAll(ViewApp.routeName, ''),
             ));
+
+    final loader = document.getElementsByClassName('loader');
+    if(loader.isNotEmpty) {
+      loader.first.remove();
+    }
 
     return GetMaterialApp(
       title: 'TemApps',

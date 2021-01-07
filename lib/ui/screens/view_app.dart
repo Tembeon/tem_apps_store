@@ -1,10 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
-import 'package:get/get.dart';
 import 'package:tem_apps_store/model/app_model.dart';
 import 'package:tem_apps_store/ui/screens/home.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -57,9 +57,13 @@ class _ViewAppState extends State<ViewApp> {
     if (app == null) {
       Navigator.pushNamed(context, HomeScreen.routeName, arguments: app);
     }
-    double width = MediaQuery.of(context).size.width;
-    double cardPadding = width / 60;
-    double insideCardPadding = width / 30;
+
+    double mediaWidth = MediaQuery.of(context).size.width;
+
+    double cardPadding = mediaWidth / 60;
+    double insideCardPadding = mediaWidth / 30;
+    double fontSmallSize = mediaWidth >= 1000 ? 20 : 18;
+    double fontBigSize = mediaWidth >= 1000 ? 32 : 22;
 
     return Scaffold(
       appBar: AppBar(
@@ -105,7 +109,7 @@ class _ViewAppState extends State<ViewApp> {
                     child: Row(
                       children: [
                         Hero(
-                          tag: 'appIcon',
+                          tag: app.id,
                           child: CachedNetworkImage(
                             width: 100,
                             height: 100,
@@ -123,14 +127,15 @@ class _ViewAppState extends State<ViewApp> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(app.name + " ",
-                                      style: TextStyle(fontSize: 32)),
+                                      style: TextStyle(fontSize: fontBigSize)),
                                   Text(app.shortDesc + " ",
-                                      style: TextStyle(fontSize: 22)),
+                                      style:
+                                          TextStyle(fontSize: fontSmallSize)),
                                   Text('Версия: ${app.version}' + ' ',
                                       style: Theme.of(context)
                                           .textTheme
                                           .caption
-                                          .copyWith(fontSize: 20)),
+                                          .copyWith(fontSize: fontSmallSize)),
                                 ],
                               )),
                         )
@@ -150,7 +155,7 @@ class _ViewAppState extends State<ViewApp> {
                       children: [
                         Text(
                           'Описание' + ' ',
-                          style: TextStyle(fontSize: 32),
+                          style: TextStyle(fontSize: fontBigSize),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(top: 8, bottom: 8),
@@ -161,12 +166,12 @@ class _ViewAppState extends State<ViewApp> {
                                 launch(link.url);
                               }
                             },
-                            style: TextStyle(fontSize: 22),
+                            style: TextStyle(fontSize: fontSmallSize),
                           ),
                         ),
                         Text(
                           'Скриншоты' + ' ',
-                          style: TextStyle(fontSize: 32),
+                          style: TextStyle(fontSize: fontBigSize),
                         ),
                         Padding(
                           padding: EdgeInsets.only(top: 8.0, bottom: 8),
@@ -200,7 +205,7 @@ class _ViewAppState extends State<ViewApp> {
                         ),
                         Text(
                           'Список изменений' + ' ',
-                          style: TextStyle(fontSize: 32),
+                          style: TextStyle(fontSize: fontBigSize),
                         ),
                         Padding(
                           padding: EdgeInsets.only(
@@ -220,9 +225,10 @@ class _ViewAppState extends State<ViewApp> {
                                         }
                                       },
                                       text: app.changelog[index]
-                                          .toString()
-                                          .replaceAll('\\n', '\n') + " ",
-                                      style: TextStyle(fontSize: 22),
+                                              .toString()
+                                              .replaceAll('\\n', '\n') +
+                                          " ",
+                                      style: TextStyle(fontSize: fontSmallSize),
                                     );
                                   },
                                   separatorBuilder:
@@ -234,7 +240,7 @@ class _ViewAppState extends State<ViewApp> {
                                 )
                               : Text(
                                   'Кажется, тут ничего нет ',
-                                  style: TextStyle(fontSize: 22),
+                                  style: TextStyle(fontSize: fontSmallSize),
                                 ),
                         ),
                       ],
