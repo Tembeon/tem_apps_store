@@ -41,6 +41,9 @@ class AppCard extends StatelessWidget {
 
   // when card clicked, open app viewer with app ID
   void _openApp(BuildContext context, String app) {
-    Navigator.pushNamed(context, ViewApp.routeName + '/' + app,);
+    Navigator.pushNamed(
+      context,
+      ViewApp.routeName + '/' + app,
+    );
   }
 }

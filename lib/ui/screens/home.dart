@@ -144,6 +144,17 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               onTap: () => _openUrl('https://t.me/tem_apps'),
             ),
+            Divider(
+              thickness: 2,
+            ),
+            ListTile(
+              title: Text(
+                'Посетить Github',
+                style: TextStyle(fontSize: 16),
+              ),
+              onTap: () => _openUrl('https://github.com/Tembeon'),
+            ),
+
           ],
         )),
       ),
