@@ -21,11 +21,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // get collection with all apps from Firestore
     CollectionReference collectionReference =
         FirebaseFirestore.instance.collection('publicApps');
     Stream<QuerySnapshot> stream;
     stream = collectionReference.snapshots();
 
+    // make card counts adaptive
     double width = MediaQuery.of(context).size.width;
     int widthCard = 170;
     int cardsCount = width ~/ widthCard;
@@ -35,6 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: Text('Приложения'),
         actions: [
+          // change site theme button
           Tooltip(
             message: 'Сменить тему',
             child: IconButton(
@@ -61,7 +64,9 @@ class _HomeScreenState extends State<HomeScreen> {
           stream: stream,
           builder:
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+            // data still loading, show loading indicator
             if (!snapshot.hasData) return _buildLoadingIndicator();
+            // got data, show apps in grid
             return GridView(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: cardsCount,
@@ -77,6 +82,7 @@ class _HomeScreenState extends State<HomeScreen> {
           },
         ),
       ),
+      // Drawer with links to my social
       drawer: Drawer(
         child: SafeArea(
             child: ListView(
@@ -119,17 +125,21 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  // Indicator for any loading content
   Center _buildLoadingIndicator() {
     return Center(
       child: CircularProgressIndicator(),
     );
   }
 
+  // open url with logging to analytics
+  // (I wanna know which one you like)
   Future<void> _openUrl(String url) async {
     if (await canLaunch(url)) {
       analytics.logEvent(
-          name: 'social_open',
-          parameters: <String, dynamic>{'selected_social': url});
+        name: 'social_open',
+        parameters: <String, dynamic>{'selected_social': url},
+      );
       launch(url);
     }
   }

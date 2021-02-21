@@ -71,9 +71,7 @@ class _ViewAppState extends State<ViewApp> {
         actions: [
           TextButton(
             onPressed: () async {
-              if (await canLaunch(app.downloadUrl)) {
-                launch(app.downloadUrl);
-              }
+              launch(app.downloadUrl);
             },
             child: Row(children: [
               Padding(

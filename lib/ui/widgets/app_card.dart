@@ -4,6 +4,7 @@ import 'package:tem_apps_store/model/app_model.dart';
 import 'package:tem_apps_store/ui/screens/view_app.dart';
 
 class AppCard extends StatelessWidget {
+  // require appID to get data from Firestore
   final PublicApp publicApp;
 
   const AppCard({Key key, this.publicApp}) : super(key: key);
@@ -13,6 +14,7 @@ class AppCard extends StatelessWidget {
     final double width = MediaQuery.of(context).size.height;
     final double imagePadding = width / 32;
 
+    // simple Card with icon and app name
     return Card(
       clipBehavior: Clip.antiAlias,
       child: InkWell(
@@ -37,6 +39,7 @@ class AppCard extends StatelessWidget {
     );
   }
 
+  // when card clicked, open app viewer with app ID
   void _openApp(BuildContext context, String app) {
     Navigator.pushNamed(context, ViewApp.routeName + '/' + app,);
   }

@@ -23,17 +23,23 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  # open any url
   url_launcher: ^5.7.10
+  # firebase libs
   firebase_core: "^0.5.3"
   cloud_firestore: "^0.14.4"
   firebase_auth: ^0.18.4+1
   firebase_analytics: ^6.3.0
+  # just useful things
   get: ^3.24.0
+  # all images
   cached_network_image: ^2.5.0
+  # links in text
   flutter_linkify: ^4.0.2
+  # storage data
   hive: ^1.4.4+1
   hive_flutter: ^0.3.1
-  auto_size_text: ^2.1.0
+  # used for url path like: /vec/$app_name
   flutter_web_router: ^0.0.1+2
 
   # The following adds the Cupertino Icons font to your application.
