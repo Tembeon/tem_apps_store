@@ -99,6 +99,31 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             ListTile(
               leading: Icon(
+                Icons.mail_outlined,
+                color: Theme.of(context).accentColor,
+              ),
+              title: Text(
+                'Написать в ВК',
+                style: TextStyle(fontSize: 16),
+              ),
+              onTap: () => _openUrl('https://vk.me/tembeon'),
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.mail_outlined,
+                color: Theme.of(context).accentColor,
+              ),
+              title: Text(
+                'Написать в Telegram',
+                style: TextStyle(fontSize: 16),
+              ),
+              onTap: () => _openUrl('https://t.me/tembeon'),
+            ),
+            Divider(
+              thickness: 2,
+            ),
+            ListTile(
+              leading: Icon(
                 Icons.info_outline,
                 color: Theme.of(context).accentColor,
               ),
